@@ -129,8 +129,9 @@ Initiatives such as \emph{Project Inthanon-LionRock} and its successor \emph{Pro
 \emph{Project Cedar} explores wholesale payment and settlement use cases on a permissioned ledger architecture, focusing on atomic settlement and reduced intermediary complexity in cross-border transactions \cite{nyicCedarAppendix}. 
 More recently, \emph{Project Agora} has aimed to improve cross-border correspondent banking by integrating tokenised commercial bank deposits and tokenised wholesale central bank money on a shared programmable platform while preserving the existing two-tier monetary system \cite{bis_press_agora_2024, bis_bulletin87_2024}.
 %Although some of the mentioned systems involve commercial-bank participation, the governance, institutional trust and the design decisions are driven finally by central-banks or public-sector-led frameworks.
-Moreover, a growing number of purely commercial-bank-driven projects aim to establish shared DLT infrastructures. 
+Moreover, a growing number of industry-led projects aim to establish shared DLT infrastructures. 
 Examples include \emph{Fnality} \cite{fnality}, which explores tokenized settlement mechanisms backed by funds held at central banks, \emph{Partior} \cite{partior}, which focuses on cross-border interbank settlement and tokenized commercial-bank liabilities, and the \emph{Canton Network} \cite{canton_network_whitepaper_2024}, intended as a ``network of networks'', aiming to provide synchronization infrastructure for tokenized financial-market applications. 
+As a related boundary case, the Commercial Bank Money Token proof of concept also considers the European Public Network, a public-permissioned EVM-based infrastructure using proof-of-authority consensus for financial-sector tokenisation use cases \cite{DKBDI2024CBMT}.
 Although these projects differ substantially in architecture and governance, they illustrate a common pattern: transaction validation, ordering, or synchronization is typically restricted to predefined authorized entities rather than opened to anonymous public participation.
 \todo{Look into deloitte workshop sources for more real world projects} 
 
@@ -144,7 +145,7 @@ The analysis distinguishes two canonical configurations.
 In a single-validator setup, one commercial institution controls transaction ordering and validation, creating strategic dependence on a rival and incentives for market fragmentation.
 In a multi-validator setup, control is distributed across a consortium of commercial institutions, but the system becomes exposed to governance stress, coordination failures, and ambiguity about authoritative state under disputed conditions.
 
-\paragraph{Related literature.}
+\paragraph{Related literature.} % Here for related works on dlt as financial market infrastructure and PoA and on the necessity of wholesale CBDC
 
 
 
@@ -152,7 +153,7 @@ In a multi-validator setup, control is distributed across a consortium of commer
 The remainder of the paper is organized as follows.
 \Cref{sec:authority-based-consensus} defines PoA and related authority-based consensus models in the context of financial-market DLTs.
 Then, \cref{sec:failure-modes} analyzes single-validator and multi-validator configurations under commercial-bank operation.
-After a discussion of neutral governance and RTGS systems as an institutional benchmark in \cref{sec:neutral-governance}, we conclude in \cref{sec:conclusions}.
+After a discussion of neutral governance and Real time Gross Settlement (RTGS) systems as an institutional benchmark in \cref{sec:neutral-governance}, we conclude in \cref{sec:conclusions}.
 
 
 ´
@@ -248,10 +249,7 @@ The problem with PoA in commercial-bank-operated systems is not that the mechani
 Rather, the problem is that its trust model does not match the institutional structure of the competition in financial markets.
 A PoA ledger must answer a simple question: who is allowed to decide the canonical ordering of economically relevant transactions?
 \Cref{tab:poa-configurations} summarizes the institutional incentive problems that arise from different allocations of validation authority in commercial-bank-operated DLT infrastructures.
-The inclusion of the neutral public or central-bank operator case should not be read as a claim that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure.
-Rather, it serves as a benchmark illustrating that the institutional assessment of PoA depends on whether validation authority is exercised by a neutral public authority or by commercially competing market participants.
-
-\begin{table*}[t]
+\begin{table*}[ht]
 	\centering
 	\small
 	\setlength{\tabcolsep}{8pt} % default is usually 6pt
@@ -279,6 +277,10 @@ Rather, it serves as a benchmark illustrating that the institutional assessment 
 	\caption{Canonical authority-based consensus configurations in financial-market DLT infrastructures. The relevant distinction is not only the number of validators, but whether validation authority is exercised by a neutral public operator or by commercially competing market participants. The classification is specific to PoA and related authority-based consensus models and is not intended as a general taxonomy of all consensus mechanisms. The table does not imply that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure..}
 	\label{tab:poa-configurations}
 \end{table*}
+The inclusion of the neutral public or central-bank operator case should not be read as a claim that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure.
+Rather, it serves as a benchmark illustrating that the institutional assessment of PoA depends on whether validation authority is exercised by a neutral public authority or by commercially competing market participants.
+
+
 
 In commercial-bank infrastructures with multiple competitors, no neutral answer emerges naturally. 
 If one of the competing firms controls validation, the system creates asymmetric dependence on that institution.
@@ -383,30 +385,72 @@ For high-value financial-market infrastructures, this creates governance and leg
 \section{Neutral governance as the institutional condition for authority-based consensus}
 \label{sec:neutral-governance}
 
-ndependent technical operation can mitigate some conflicts only if the service provider is institutionally constrained by neutral governance, clear accountability, and legally specified finality rules. A technical outsourcing arrangement alone does not create neutrality if ultimate control remains with a subset of competing market participants.
+The previous section analyzed the structural failure modes of PoA consensus when applied to shared market infrastructures operated by commercial banks or other competitors in the market.
+This section argues that these failures are not inherent to authority-based consensus as such, but arise from the institutional position of the authority exercising control over transaction ordering, inclusion, and finality.
+Thus, we examine how neutral governance makes authority-based consensus viable.
+First, we briefly demonstrate that the above failure modes are mitigated when the validators in PoA consensus are no competing market participants.
+Second, we discuss existing RTGS systems as institutional analogues for successful authority-based settlement infrastructures under neutral governance. 
+Finally, we argue that the absence of relevant privately operated RTGS systems supports the view that shared financial market infrastructures require governance by either public authorities, such as central banks, or independent technical service providers whose role is institutionally separated from competitive banking activity.
+Consequently, we argue that the absence of relevant privately-operated RTGS systems supports the view that shared financial market infrastructures require governance by either public authorities, such as central banks, or independent technical service providers whose role is institutionally separated from competitive banking activity.
 
-\subsection{RTGS: A successful single-validator with neutral governance}
+
+\subsection{Why neutrality changes the institutional problem of Proof-of-Authority}
+The failure modes identified above do not arise from authority-based consensus as such, but from the institutional position of the authority exercising control over ordering, inclusion and finality. 
+In a commercial-bank-operated PoA system, authority is assigned to actors that are themselves competitors in the market served by the infrastructure. 
+This creates a structural conflict between the collective function of the infrastructure and the private incentives of its operators. 
+Validator authority can therefore become strategically sensitive, as outlined above.
 
 
+Neutral governance changes this institutional problem because the authority is separated from the competitive interests of the participants using the infrastructure. 
+If the validating entity is a public authority, an independent operator, or another institutionally neutral body, the dependence on authority no longer takes the form of dependence on a market rival. 
+This does not eliminate the need for accountability, operational resilience, or clear governance procedures. 
+It does, however, remove the central source of strategic mistrust that makes commercial-bank-operated PoA unsuitable for shared financial market infrastructures. 
+Under neutral governance, authority-based consensus can therefore function as a technical mechanism providing non-discriminatory ordering, inclusion, and finality within the infrastructure.
+In such a setting, the potential benefits of DLT, including atomic settlement and programmability through smart contracts, can be realized in an ideal way.
 
-Real-Time Gross Settlement (RTGS) systems illustrate that a single authoritative operator can be compatible with financial-market infrastructure where the operator is neutral, has a public mandate, provides or settles in risk-free central bank money, and is supported by clear legal finality. RTGS therefore serves as an institutional benchmark rather than a technical analogy to DLT consensus. It shows that centralization of the authoritative settlement layer is not necessarily problematic in itself. The decisive condition is that the authority is not a commercial competitor in the markets served by the infrastructure.
 
+In practice, such neutrality may be provided by central banks, whose public mandate and established role in settlement finality make them institutionally well suited to operate or govern authority-based financial market infrastructures, but whose direct involvement may limit flexibility, innovation speed, or private-sector experimentation.
+Alternatively, neutrality may be provided by independent technical service providers, which can offer operational expertise and greater implementation flexibility, but only if their role is confined to technical operation and embedded in governance arrangements that prevent capture by, or preferential treatment of, individual market participants.
+A technical outsourcing arrangement alone does not create neutrality if ultimate control remains with a subset of competing market participants.
+
+ 
+
+\subsection{Real Time Gross Settlement systems: Authority-based settlement infrastructures with neutral governance}
+
+
+RTGS systems illustrate that an authority-based settlement infrastructure can be compatible with financial-market infrastructure where the operator is neutral, has a public mandate, provides or settles in risk-free central bank money, and is supported by clear legal finality. 
+RTGS systems, therefore, serve as an institutional benchmark rather than a technical analogy to DLT consensus.
+They show that centralization of the authoritative settlement layer is not necessarily problematic in itself. 
+The decisive condition is that the authority is not a commercial competitor in the markets served by the infrastructure.
+
+The fact that existing RTGS systems are not DLT systems does not weaken this comparison, because the argument concerns the institutional allocation of settlement authority rather than the specific technical architecture used to record transactions.
+Replacing the database layer of an RTGS-like system with DLT would not, by itself, compromise its institutional suitability, provided that authority over validation, ordering, and finality remained neutral, legally grounded, and separated from commercial competition.
+
+
+The institutional suitability of RTGS systems can be summarized by the following features, each of which addresses one of the strategic vulnerabilities that arise when authority is assigned to competing market participants:
 \begin{itemize}
-	\item \textbf{Neutral operator:} Central bank is not a commercial competitor; no incentive to exploit transaction ordering or information asymmetries.
+	\item \textbf{Neutral settlement authority:} The central bank is not a commercial competitor; it has no incentive to exploit transaction ordering, access decision or information asymmetries.
 	
-	\item \textbf{Legal finality:} Settlement is backed by central bank money and supported by clear legal frameworks; no ambiguity about the canonical state.
+	\item \textbf{Legal finality:} Settlement takes place in central bank money and is supported by clear legal frameworks; this removes ambiguity about the authoritative settlement state.
 	
-	\item \textbf{Unified infrastructure:} All major banks are required or strongly incentivized to participate; no fragmentation into competing systems.
+	\item \textbf{System-wide infrastructure:} RTGS systems provide a common settlement layer for high-value payments and related financial-market activity. Their role as shared infrastructure reduces incentives for fragmentation into rival settlement systems.
 	
-	\item \textbf{Trusted governance:} Central bank mandate (financial stability, payment system efficiency) aligns with system-wide interests rather than private incentives.
+	\item \textbf{Trusted governance:} Central bank mandate (monetary and financial stability, payment system efficiency) aligns with system-wide interests rather than private incentives.
 	
-	\item \textbf{Operational control and accountability:} Clear responsibility for system operation, risk management, and incident resolution.
+	\item \textbf{Operational responsibility and accountability:} Authority over the infrastructure is matched by identifiable responsibility for system operation, risk management, incident handling, and crisis procedures.
+
+	\item \textbf{Single authoritative state:} RTGS systems maintain one authoritative settlement record. This avoids the institutional equivalent of competing ledger states and removes the need for market participants to coordinate around rival versions of settlement history.
 	
-	\item \textbf{No fork risk:} Single authoritative ledger eliminates the possibility of competing states or post-hoc reconciliation.
 \end{itemize}
-The absence of privately operated RTGS systems among competing commercial banks highlights that the viability of single-validator architectures critically depends on neutral governance and the provision of a risk-free settlement asset—conditions that are not met in PoA-based commercial-bank DLT systems.
+
+\subsection{The absence of privately operated RTGS systems}
+The limited and qualified role of private operation in RTGS systems indicates that the viability of single-validator architectures critically depends on neutral governance and the provision of a risk-free settlement asset—conditions that are not met in PoA-based commercial-bank DLT systems.
 
 
+
+
+
+%Authority-based consensus is not unsuitable for financial market infrastructures per se; it is unsuitable when the authority is itself a competing commercial bank or coalition of competing commercial banks.
 \section{Conclusions}
 \label{sec:conclusions}
 

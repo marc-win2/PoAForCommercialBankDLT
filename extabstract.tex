@@ -1,0 +1,113 @@
+%\documentclass[english, 10pt,twocolumn]{article}
+\documentclass[
+reprint,
+showkeys,
+superscriptaddress,
+aps,
+pra,
+longbibliography,
+nofootinbib
+]{revtex4-2}
+\usepackage{placeins}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{dsfont}
+\usepackage{eurosym}
+\usepackage[hyperref]{xcolor}
+\usepackage[
+colorlinks,
+pdfpagelabels,
+breaklinks,
+pdfstartview=FitH,
+bookmarksopen=true,
+bookmarksnumbered=true,
+bookmarksopenlevel=2,
+plainpages=false,
+hypertexnames=false,
+pdftitle={Why Proof-of-Authority Consensus Is Unsuitable for Commercial-Bank-Operated DLT Financial Market Infrastructures},
+pdfauthor={Marc Winstel},
+pdfkeywords={},
+]{hyperref}
+\usepackage{bookmark}
+\usepackage[capitalise,sort,compress]{cleveref}
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+\usepackage{url}
+
+\makeatletter
+\renewcommand\paragraph{%
+	\@startsection{paragraph}{4}{\z@}%
+	{1.5ex plus 0.5ex minus 0.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}%
+}
+\makeatother
+\setcounter{secnumdepth}{3}
+
+\begin{document}
+	
+\title{Why Proof-of-Authority Consensus Is Ill-Suited for Commercial-Bank-Operated DLT-Based Financial Market Infrastructures}
+	
+	\author{Marc Winstel}
+	\email{marc.winstel@bundesbank.de}
+	\affiliation{D\euro{} 10-5, Deutsche Bundesbank, Germany}
+	
+	\date{22 May, 2026}
+	
+	\begin{abstract}
+		Distributed ledger technology (DLT) is widely discussed as a foundation for future financial-market infrastructures, including interbank settlement, cross-border payments, securities settlement, collateral management, and tokenized asset markets \cite{bisUnifiedLedger2025,oecdTokenisation2024,cpmiDlt2017,ecbDlt2016}. 
+		In these contexts, DLT promises shared programmable infrastructures, reduced reconciliation complexity, atomic settlement, and potentially continuous operation across institutions, jurisdictions, and time zones \cite{cpmiDlt2017,bisUnifiedLedger2023}. 
+		Existing public-sector and industry initiatives, including Project Inthanon-LionRock, Project mBridge, Project Cedar, Project Agora, Fnality, Partior, and the Canton Network, illustrate the continuing search for architectures that combine programmability with the legal and operational requirements of regulated financial markets \cite{inthanonLionrock2020,bisMbridge2022,nyicCedarAppendix,bis_press_agora_2024,bis_bulletin87_2024,fnality,partior,canton_network_whitepaper_2024}. 
+		
+		A common feature of many institutional DLT systems is that transaction validation, ordering, or synchronization is restricted to predefined and legally identifiable entities rather than being open to anonymous participation. 
+		This paper argues that this design choice creates a structural governance problem when authority over the ledger state is exercised by entities that are simultaneously competitors in the markets served by the infrastructure.
+		
+		The paper uses the term Proof-of-Authority (PoA) consensus in a broad analytical sense. It covers explicit Ethereum-derived PoA protocols such as Clique, IBFT, IBFT~2.0, and QBFT, as well as functionally similar authority-based arrangements such as notary services, ordering services, validator committees, synchronization committees, or sequencing committees in permissioned financial-market DLTs \cite{szilagyi2017clique,moniz2020ibft,saltini2019ibft2,besuPoa,goquorumConsensus,cordaNotary,fabricOrdering,canton_network_whitepaper_2024}. 
+		The purpose of this terminology is not to claim protocol equivalence. 
+		Rather, PoA serves as a proxy for centralized or restricted consensus authority in systems where a legally identified and administratively selected group of institutions determines the authoritative ledger state. 
+		The institutional question is,therefore, not only whether a consensus protocol can technically deliver high throughput, low latency, or deterministic finality. 
+		The central question is who is allowed to decide the ordering, inclusion, and finalization of economically significant transactions.
+		
+		The current version of the paper distinguishes two canonical configurations. In the single-validator case, PoA collapses into a centrally operated ledger.
+		Such a structure may be viable where the validator is a central bank, public authority, or legally mandated infrastructure operator that is not itself a competitor in the relevant market. 
+		It is much less plausible where the validator is a commercial bank. 
+		A major bank has weak incentives to rely on a ledger whose ordering policy, inclusion decisions, operational availability, and technical roadmap are controlled by a direct rival. 
+		The concern is not merely reputational. 
+		The validator has privileged technical control over the ledger state and may be able to delay, censor, reorder, or observe transactions before they are finalized. 
+		The literature on front-running and maximal extractable value illustrates that ordering power can itself become economically valuable \cite{daian2020flashboys,eskandari2019transparent}. 
+		Even where selfish reordering or discriminatory conduct is legally prohibited, the mere technical possibility is enough to create strategic dependence on the validating institution. Legal accountability is therefore an important safeguard, but it does not substitute for neutral governance of the consensus layer, especially in high-value infrastructures where large volumes of transactions depend on ordering and inclusion decisions.
+		
+		This strategic dependence creates a fragmentation mechanism. 
+		Smaller participants may accept dependence on a dominant validator in exchange for access, liquidity, and network effects. 
+		Sufficiently large competitors, however, have incentives to either not join or to create rival infrastructures.
+		The likely result is not a unified shared ledger, but a set of bank-operated settlement islands with limited interoperability and duplicated liquidity. Interoperability would then have to be restored through bridges, APIs, contractual arrangements, or other reconciliation mechanisms. 
+		In this scenario, the DLT-specific value proposition is weakened at the inter-institutional level: the system reintroduces precisely the reconciliation complexity, liquidity fragmentation, and coordination layers that shared DLT infrastructures were supposed to reduce.
+		
+		The multi-validator case appears more attractive because authority is distributed across multiple institutions. 
+		However, it transforms unilateral dependence into consortium governance among competing commercial actors. 
+		A validator consortium must determine validator admission, voting rights, software upgrades, fee rules, access conditions, sanctions, emergency powers, incident handling, and dispute resolution. 
+		Byzantine-fault-tolerant protocols, quorum rules, or rotating proposer mechanisms can reduce or eliminate routine forks at the technical level, but they do not remove the institutional question of who controls the procedures that determine the authoritative state under stress. 
+		Round-robin block production, for example, does not by itself imply persistent forks when combined with quorum-based finality. 
+		The relevant problem is instead that disputes over proposer selection, ordering rules, missed slots, sanctions, upgrades, or emergency interventions may become economically contested. 
+		If the protocol and governance framework fail to resolve such disputes, the result may be halted finality, emergency intervention, or competing claims about the authoritative ledger state.
+		
+		The failure mode of multi-validator PoA is not characterized by simple centralization, but as institutional ambiguity. 
+		Control is distributed, yet the authority to resolve disagreement, define finality, and adapt the system remains embedded in a consortium of competing institutions.
+		As the value settled on the platform grows, governance decisions become more economically significant and therefore more contested. 
+		Legal frameworks must specify not only normal operation, but also failure handling, validator disputes, emergency coordination, and the relationship between technical finality and legal finality, all in the midst of real-time operation.
+		This issue is not unique to PoA, but it is particularly acute in authority-based financial-market DLTs that represent legally recognized payments, securities, or tokenized claims. 
+		Unresolved finality disputes may create spillovers beyond the platform itself and, in sufficiently large or interconnected infrastructures, may become a source of systemic risk.
+		
+		The paper contrasts these commercial-bank-operated configurations with neutral governance as an institutional benchmark. Real-Time Gross Settlement (RTGS) systems illustrate that a single authoritative operator can be compatible with financial-market infrastructure where the operator is neutral, has a public mandate, provides or settles in risk-free central bank money, and is supported by clear legal finality. The argument is therefore not that authority-based consensus is technically unusable or that centralized operation is always inappropriate. Rather, the institutional viability of PoA depends on the identity, mandate, and incentives of the authority. PoA and related authority-based consensus models may be suitable under neutral public governance through a central bank or independent technical operation through an appropriate service provider. These consensus approaches are structurally fragile when the validation authority is allocated to private-sector companies competing in the same market. The contribution of the paper is to shift the assessment of permissioned DLT consensus from technical performance to market structure, governance, and legal finality.
+	\end{abstract}
+	
+	\keywords{tokenization, proof-of-authority, consensus, blockchain, digital assets, smart contracts, financial market infrastructures}
+	
+	\maketitle
+	
+	\FloatBarrier
+	\bibliography{Bib.bib}
+	
+\end{document}

@@ -39,6 +39,7 @@ pdftitle={Why Proof-of-Authority Consensus Is Unsuitable for Commercial-Bank-Ope
 pdfauthor={Marc Winstel},
 pdfkeywords={},
 ]{hyperref}
+\usepackage{xurl}
 \usepackage{bookmark}
 \usepackage[capitalise,sort,compress]{cleveref}	% for clever references
 % for oxford comma in cleveref
@@ -79,24 +80,24 @@ pdfkeywords={},
 \title{Why Proof-of-Authority Consensus Is Ill-Suited for Commercial-Bank-Operated DLT-Based Financial Market Infrastructures}
 	
 	\author{Marc Winstel}
-	\email{marc.winstel@bundesbank.de}
+	\email{marc.winstel@bundesbank.de}\thanks{The views in this paper are those of the author and do not necessarily coincide with those of the Deutsche Bundesbank or the Eurosystem.}
 	\affiliation{
-	    D\euro{} 10-5,Deutsche Bundesbank, Germany
+	    Deutsche Bundesbank, Wilhelm-Epstein-Straße 14, 60431 Frankfurt am Main, Germany.
 	}
 	
 	\date{\today}
 	
 	\begin{abstract}
-		Distributed ledger technology (DLT) has been widely proposed as a foundation for interbank settlement, cross-border payments, and tokenized asset markets in the future financial market. In this context, systems are typically permissioned and rely on Proof-of-Authority (PoA) or similar consensus mechanisms to achieve scalability and operational efficiency. %However, the suitability of PoA for commercial-bank infrastructures remains fundamentally unclear.
+		Distributed ledger technology (DLT) has been widely proposed as a foundation for interbank settlement, cross-border payments, and tokenized asset markets in the future financial market. 
+		In this context, systems are typically permissioned and rely on Proof-of-Authority (PoA) or similar consensus mechanisms to achieve scalability and operational efficiency. 
 		This paper identifies structural governance tensions in PoA-based, commercial-bank operated DLT systems.
 		Therefore, PoA is analyzed through the lens of institutional market structure and economic incentives for participating or operating commercial banks.
 		
-		Two canonical configurations of the PoA consensus are distinguished: single-validator and multi-validator PoA systems.
 		We argue that the institutional viability of authority-based consensus depends less on technical performance than on the identity, mandate, and incentives of the authority controlling transaction ordering, inclusion, and technical finality.
-		Single-validator PoA introduces strategic dependence on a competing entity and creates incentives for market fragmentation, since large competitors have little reason to rely on infrastructure operated by a rival. 
+		PoA with a single validating entity introduces strategic dependence on a competing entity and creates incentives for market fragmentation, since large competitors have little reason to rely on infrastructure operated by a rival. 
 		Multi-validator PoA distributes control, but exposes the infrastructure to governance stress, coordination failures and ambiguity over authoritative state, especially when operational governance of the systems themselves become economically contested.
 	%To contextualize these findings, we contrast PoA-based designs with Real-Time Gross Settlement (RTGS) systems. RTGS demonstrates that single-validator architectures can be viable when operated by a neutral authority issuing a risk-free settlement asset. The absence of comparable privately operated systems highlights that the limitations of PoA are not primarily technical, but institutional.
-		This suggest that PoA consensus does not provide a robust foundation for unified commercial-bank DLT infrastructures and that alternative architectures must explicitly account for governance, incentives, and legal finality.
+		This suggests that PoA consensus does not provide a robust foundation for unified commercial-bank DLT infrastructures and that alternative architectures must explicitly account for governance, incentives, and legal finality.
 		However, PoA consensus may be viable in DLT under neutral governance, such as operation by technical service providers or central-banks, due to the lack of incentives to reorder transactions or exploit informational asymmetries. 
 	\end{abstract}
 	
@@ -146,6 +147,13 @@ In a single-validator setup, one commercial institution controls transaction ord
 In a multi-validator setup, control is distributed across a consortium of commercial institutions, but the system becomes exposed to governance stress, coordination failures, and ambiguity about authoritative state under disputed conditions.
 
 \paragraph{Related literature.} % Here for related works on dlt as financial market infrastructure and PoA and on the necessity of wholesale CBDC
+This paper relates to two strands of literature.
+First, it contributes to the growing literature and policy discussion on DLT-based financial-market infrastructures, tokenisation, wholesale settlement, and programmable payment systems.
+Central-bank, policy, and regulatory work has examined the potential use of DLT in payment, clearing and settlement, the settlement of tokenised assets in central-bank money, cross-border wholesale CBDC platforms, and unified-ledger or programmable-platform architectures \cite{cpmiDlt2017, auerMonnetShin2021,bisUnifiedLedger2023,bisTokenisation2024,oecdTokenisation2024,projectHelvetia,projectJura,bisMbridge2022,nyicCedarAppendix}.
+Second, the paper builds on the technical work on distributed consensus, Byzantine fault tolerance and permissioned blockchains with particular focus on authority-based consensus mechanisms \cite{lamportByzantine1982,lamport1998paxos,ongaro2014raft,hyperledgerfabric,brown2016corda,szilagyi2017clique,moniz2020ibft,saltini2019ibft2}.
+While this literature explains how distributed systems can agree on transaction validation, inclusion, ordering, and state replication, the present paper focuses on a different question, relating to relevant work on the future of financial market infrastructure \cite{mills2016dlt,cpmiDlt2017,oecdTokenisation2020,bisUnifiedLedger2023,bisUnifiedLedger2025,oecdTokenisation2024}: whether the institutional allocation of authority to provide consensus is compatible with shared financial-market infrastructure when the validators are themselves competitors in the market.
+In this respect, the analysis also connects to work on transaction-ordering power, front-running and maximal extractable value, and to the financial-market-infrastructure literature on governance, legal basis, and settlement finality \cite{daian2020flashboys,eskandari2019transparent}.
+
 
 
 
@@ -162,7 +170,7 @@ After a discussion of neutral governance and Real time Gross Settlement (RTGS) s
 Conceptually, a DLT consists of a set of distributed nodes, which are computers or systems operated by participating entities, maintaining a shared ledger state through a consensus mechanism \cite{cpmiDlt2017,nakamoto2008}. 
 The consensus algorithm describes how the nodes agree on the validity and ordering of transactions and ensures that participants converge on a common representation of the system state despite distributed operation.
 Consequently, the consensus mechanism effectively determines which transactions become part of the authoritative ledger state and under which conditions state transitions are finalized.
-Examples of distributed consensus mechanisms include classical distributed systems algorithms such as Paxos \cite{lamport1998paxos} or Raft \cite{ongaro2014raft} as well as blockchain-specific approaches such as Proof-of-Work (PoW)\cite{nakamoto2008}, Proof-of-Stake (PoS) \cite{buterincasper2018PoS}, or Proof-of-Authority (PoA) (see, e.g., \cite{MANOLACHE2022580,cliquePoA,woodPoA}). 
+Examples of distributed consensus mechanisms include classical distributed systems algorithms such as Paxos \cite{lamport1998paxos} or Raft \cite{ongaro2014raft} as well as blockchain-specific approaches such as Proof-of-Work (PoW)\cite{nakamoto2008}, Proof-of-Stake (PoS) \cite{buterincasper2018PoS}, or Proof-of-Authority (PoA) (see, e.g., \cite{MANOLACHE2022580,szilagyi2017clique,woodPoA}). 
 
 
 Public DLT systems often rely on open participation and decentralized consensus at the cost of scalability, settlement latency and computational efficiency.

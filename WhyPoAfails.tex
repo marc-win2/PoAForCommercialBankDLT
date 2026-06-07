@@ -156,8 +156,6 @@ Then, \cref{sec:failure-modes} analyzes single-validator and multi-validator con
 After a discussion of neutral governance and Real time Gross Settlement (RTGS) systems as an institutional benchmark in \cref{sec:neutral-governance}, we conclude in \cref{sec:conclusions}.
 
 
-´
-
 \section{Authority-based consensus in financial-market DLTs}
 \label{sec:authority-based-consensus}
 
@@ -429,6 +427,7 @@ Replacing the database layer of an RTGS-like system with DLT would not, by itsel
 
 The institutional suitability of RTGS systems can be summarized by the following features, each of which addresses one of the strategic vulnerabilities that arise when authority is assigned to competing market participants:
 \begin{itemize}
+	\setlength\itemsep{0.1em}
 	\item \textbf{Neutral settlement authority:} The central bank is not a commercial competitor; it has no incentive to exploit transaction ordering, access decision or information asymmetries.
 	
 	\item \textbf{Legal finality:} Settlement takes place in central bank money and is supported by clear legal frameworks; this removes ambiguity about the authoritative settlement state.
@@ -439,36 +438,73 @@ The institutional suitability of RTGS systems can be summarized by the following
 	
 	\item \textbf{Operational responsibility and accountability:} Authority over the infrastructure is matched by identifiable responsibility for system operation, risk management, incident handling, and crisis procedures.
 
-	\item \textbf{Single authoritative state:} RTGS systems maintain one authoritative settlement record. This avoids the institutional equivalent of competing ledger states and removes the need for market participants to coordinate around rival versions of settlement history.
+	\item \textbf{Single authoritative state:} RTGS systems maintain one authoritative settlement record. This avoids the institutional equivalent of competing ledger states and removes the need for market participants to coordinate around rival versions of settlement history.\\
 	
 \end{itemize}
 
-\subsection{The absence of privately operated RTGS systems}
-The limited and qualified role of private operation in RTGS systems indicates that the viability of single-validator architectures critically depends on neutral governance and the provision of a risk-free settlement asset—conditions that are not met in PoA-based commercial-bank DLT systems.
+
+\subsection{The limited role of private operation in RTGS systems}
 
 
 
+The role of private operation in RTGS systems is limited and institutionally qualified. Existing arrangements do not generally assign autonomous settlement authority to a commercial bank or a subset of competing commercial banks. Where private entities are involved, their role is typically embedded in a framework of central-bank settlement, public oversight, or delegated technical operation. The Swiss SIC system illustrates this distinction: it is operated by SIX Interbank Clearing Ltd on behalf of the Swiss National Bank (SNB), while the SNB remains the relevant public authority behind the system \cite{snb_sic_2024, snb_sic_web}. 
+Similarly, the historical CHAPS arrangement in the United Kingdom involved private-sector governance of the high-value payment system, but this model was replaced in 2017 by direct operation of CHAPS by the Bank of England in order to strengthen end-to-end risk management and financial stability \cite{boe_chaps_direct_delivery_2017,boe_rtgs_chaps_intro_2025}.
 
 
-%Authority-based consensus is not unsuitable for financial market infrastructures per se; it is unsuitable when the authority is itself a competing commercial bank or coalition of competing commercial banks.
+This distinction is important for PoA-based DLT financial market infrastructures. 
+Private technical operation does not create the same institutional problem as private settlement authority, provided that control over access, rule changes, ordering, finality, and crisis procedures remains neutral and accountable. 
+By contrast, a PoA system operated or governed by commercial banks assigns the authoritative settlement function to actors with direct competitive interests in the market served by the infrastructure. 
+
+The RTGS experience therefore supports the central claim of this section: authority-based consensus is not unsuitable for financial market infrastructures per se; it is unsuitable when the authority is itself a competing market participant or coalition of competing market participants.
+Consequently, the RTGS systems in established financial markets do not support autonomous settlement authority by competing commercial banks, but instead points to central-bank operation, such as in T2 \cite{ecb_t2_2026} or Fedwire Funds \cite{fedwire_funds_2024}, operated by the Eurosystem and Federal Reserve System, respectively, or institutionally qualified private operation under central-bank settlement, public oversight, or delegated technical mandates, as illustrated by SIC, which is operated by SIX on behalf of and under the supervision of the SNB \cite{snb_sic_2024}, and Lynx, which is operated by Payments Canada while relying on settlement accounts at the Bank of Canada \cite{canada_lynx_bylaw_2021}.
+This is also reflected in major privately operated high-value payment systems such as CHIPS and EURO1, which do not constitute autonomous private RTGS systems but instead rely on liquidity-saving netting or hybrid settlement mechanisms and remain anchored in central-bank money or central-bank-operated settlement infrastructures \cite{chips_tch,eba_euro1_key_features}.
+
 \section{Conclusions}
 \label{sec:conclusions}
 
 The contribution of this paper is to shift the assessment of permissioned DLT consensus from technical performance alone to market structure, governance, and legal finality. In commercial-bank-operated financial-market infrastructures, the central design problem is not merely how consensus is reached, but who is institutionally authorized to determine the canonical ordering and final settlement state.
 
-\begin{itemize}
-	\item PoA does not fit with economic incentives for a fair and open market DLT infrastructure
-	\item with commercial bank PoA operated DLTs favor either market fragmentation or coordination failures and high-value dispute resolutions 
-	
-	\item Reason that central bank DLT can still be operated with PoA due to neutral governance, lack of economic incentives to reorder transactions or exploit informational asymmetry.
-\end{itemize}
+The contribution of this paper is to shift the assessment of permissioned DLT consensus from technical performance alone to market structure, governance, and legal finality. 
+In commercial-bank-operated financial-market infrastructures, the central design problem is not merely how consensus is reached, but who is institutionally authorized to determine the canonical ordering and final settlement state. 
+Proof-of-Authority (PoA) consensus is therefore not only a technical design choice. 
+It allocates control over transaction inclusion, ordering, and finality to an identifiable authority or group of authorities whose institutional position matters for the viability of the infrastructure.
+
 
 \subsection{Summary}
 
+This paper has argued that PoA consensus is structurally ill-suited for DLT-based financial-market infrastructures operated by market participants. 
+The problem is not that PoA lacks technical performance: in permissioned environments, it can provide efficient transaction validation and operational simplicity. 
+Its weakness lies in the institutional allocation of authority. 
+When the validator role is assigned to commercial banks or consortia of commercial banks, consensus authority is allocated to institutions that are themselves market participants and potential competitors of those relying on the infrastructure.
+
+This creates a structural dilemma. 
+A single-validator PoA consensus design concentrates control over transaction inclusion, ordering, and finality in one commercial bank, thereby creating strategic dependence on a rival and encouraging market fragmentation. 
+A multi-validator PoA design distributes this authority, but does not make it neutral; instead, it shifts the problem into the governance layer, where competing validators may face coordination failures, ambiguous accountability, and high-value disputes over protocol rules, validator conduct, emergency interventions, or the authoritative ledger state. 
+The conclusion is therefore not that PoA cannot establish technical consensus, but that commercial-bank-operated PoA does not provide an institutionally robust basis for a fair, open, and legally reliable financial-market infrastructure.
+
 \subsection{Discussion}
 
+The analysis does not imply that PoA consensus is unsuitable for all financial DLT applications. 
+Rather, it identifies the institutional conditions under which authority-based consensus can be viable. 
+PoA may be appropriate where the validating authority is not itself a competing market participant, where governance is embedded in a public mandate, or where the ledger does not provide a common settlement infrastructure for rival institutions. 
+This distinction explains why central-bank-operated or central-bank-led DLT arrangements can rely on authority-based consensus more plausibly than commercial-bank-operated systems. 
+A central bank does not occupy the same strategic position as a commercial bank: it does not compete with settlement participants in the relevant market, is not exposed to the same incentives to exploit informational asymmetries, and can anchor finality in an established public-law and monetary framework.
+
+
+The broader implication is that consensus mechanisms for financial-market infrastructures cannot be assessed independently of institutional design.
+In high-value settlement systems, the consensus layer is not merely a technical device for ordering messages among known nodes. It allocates authority over inclusion, ordering, and finality, and therefore determines who can produce the authoritative state of the system.
+DLT-based financial-market infrastructures therefore require a careful separation between technical validation and institutional authority. Efficient consensus is not sufficient; the infrastructure must also provide a governance structure capable of producing a neutral, legally reliable, and final settlement state.
+
+
+
+One interesting implication of this analysis, that needs to be further explored, is that future DLT-based financial-market infrastructures may require hybrid architectures that separate public settlement authority from private innovation at higher layers.
+The author suggests a design where a layer-one (L1) infrastructure operated or governed by a public authority could provide the neutral settlement, synchronization, and finality layer, while privately operated layer-two (L2) networks could offer application-specific functionality, market services, or operational experimentation.
+This would allow interbank settlement of high-value obligations to remain anchored in a neutral institutional framework, while still enabling market participants to develop DLT-based services on top of that foundation on their respective L2s.
+In a setting where central banks provide such an L1, the issuance and settlement of tokenised wholesale central bank money can also be explored.
+
 \section{Acknowledgements}
-The author acknowledges useful discussions with Jan Boensel on the implications of PoA and related topics.
+The author acknowledges useful discussions with Jan Boensel on the implications of consensus mechanisms for financial market infrastructure.
+Further, the author acknowledges useful collaboration with Jan Boensel, David-Alexandre Guiraud, and Andrea Tundis on related topics.
 The author thanks the general directorate ``digital euro'' at Deutsche Bundesbank, specifically all members of department D\euro{} 1 for continuing discussions on wholesale CBDC, DLT and related topics.
 The writing of this manuscript was supported using artificial intelligence tools, specifically \textit{ChatGPT} by \textit{OpenAI} \cite{chatgpt} and \textit{Claude} by \textit{Anthropic} \cite{claude}.
 The author carefully reviewed, revised, and validated all generated content.

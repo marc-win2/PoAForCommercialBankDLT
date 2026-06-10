@@ -80,7 +80,8 @@ pdfkeywords={},
 \title{Why Proof-of-Authority Consensus Is Ill-Suited for Commercial-Bank-Operated DLT-Based Financial Market Infrastructures}
 	
 	\author{Marc Winstel}
-	\email{marc.winstel@bundesbank.de}\thanks{The views in this paper are those of the author and do not necessarily coincide with those of the Deutsche Bundesbank or the Eurosystem.}
+	\email{marc.winstel@bundesbank.de}
+	\thanks{The views expressed in this paper are those of the author and do not necessarily coincide with those of the Deutsche Bundesbank or the Eurosystem.}
 	\affiliation{
 	    Deutsche Bundesbank, Wilhelm-Epstein-Straße 14, 60431 Frankfurt am Main, Germany.
 	}
@@ -88,17 +89,19 @@ pdfkeywords={},
 	\date{\today}
 	
 	\begin{abstract}
-		Distributed ledger technology (DLT) has been widely proposed as a foundation for interbank settlement, cross-border payments, and tokenized asset markets in the future financial market. 
-		In this context, systems are typically permissioned and rely on Proof-of-Authority (PoA) or similar consensus mechanisms to achieve scalability and operational efficiency. 
-		This paper identifies structural governance tensions in PoA-based, commercial-bank operated DLT systems.
-		Therefore, PoA is analyzed through the lens of institutional market structure and economic incentives for participating or operating commercial banks.
+		Distributed ledger technology (DLT) has been widely proposed as a foundation for interbank settlement, cross-border payments, and tokenized asset markets in the future financial market infrastructures. 
+		In this context, systems are typically permissioned and rely on Proof-of-Authority (PoA) or similar consensus mechanisms to achieve scalability and operational efficiency.
 		
+		 
+		This paper identifies structural governance tensions in PoA-based, commercial-bank operated DLT systems by analyzing the role of PoA through the lens of institutional market structure and economic incentives for participating or operating commercial banks.	
 		We argue that the institutional viability of authority-based consensus depends less on technical performance than on the identity, mandate, and incentives of the authority controlling transaction ordering, inclusion, and technical finality.
 		PoA with a single validating entity introduces strategic dependence on a competing entity and creates incentives for market fragmentation, since large competitors have little reason to rely on infrastructure operated by a rival. 
-		Multi-validator PoA distributes control, but exposes the infrastructure to governance stress, coordination failures and ambiguity over authoritative state, especially when operational governance of the systems themselves become economically contested.
+		Multi-validator PoA distributes control, but exposes the infrastructure to governance stress, coordination failures and ambiguity over authoritative state, especially when operational governance of systems themselves become economically contested.
 	%To contextualize these findings, we contrast PoA-based designs with Real-Time Gross Settlement (RTGS) systems. RTGS demonstrates that single-validator architectures can be viable when operated by a neutral authority issuing a risk-free settlement asset. The absence of comparable privately operated systems highlights that the limitations of PoA are not primarily technical, but institutional.
-		This suggests that PoA consensus does not provide a robust foundation for unified commercial-bank DLT infrastructures and that alternative architectures must explicitly account for governance, incentives, and legal finality.
-		However, PoA consensus may be viable in DLT under neutral governance, such as operation by technical service providers or central-banks, due to the lack of incentives to reorder transactions or exploit informational asymmetries. 
+		%This suggests that PoA consensus does not provide a robust foundation for unified commercial-bank DLT infrastructures and that alternative architectures must explicitly account for governance, incentives, and legal finality.
+		%However, PoA consensus may be viable in DLT under neutral governance, such as operation by technical service providers or central-banks, due to the lack of incentives to reorder transactions or exploit informational asymmetries. 
+
+		The analysis suggests that PoA is not unsuitable for financial DLTs per se, but is ill-suited where validation authority is exercised by competitors in the market rather than by a neutral public or institutionally separated operator.
 	\end{abstract}
 	
 	\keywords{
@@ -126,17 +129,16 @@ These expectations have led to extensive experimentation by central banks, comme
 
 %\paragraph{DLT-based financial market projects.}
 A number of central-bank-driven projects illustrate this development.
-Initiatives such as \emph{Project Inthanon-LionRock} and its successor \emph{Project mBridge} investigate shared DLT infrastructures for cross-border payments and foreign-exchange settlement involving commercial and central banks \cite{inthanonLionrock2020, bisMbridge2022}. 
-\emph{Project Cedar} explores wholesale payment and settlement use cases on a permissioned ledger architecture, focusing on atomic settlement and reduced intermediary complexity in cross-border transactions \cite{nyicCedarAppendix}. 
+Initiatives such as \emph{Project Inthanon-LionRock}, its successor \emph{Project mBridge} and \emph{Project Cedar} investigate shared DLT infrastructures for cross-border payments and foreign-exchange settlement involving commercial and central banks \cite{inthanonLionrock2020, bisMbridge2022,nyicCedarAppendix}. 
 More recently, \emph{Project Agora} has aimed to improve cross-border correspondent banking by integrating tokenised commercial bank deposits and tokenised wholesale central bank money on a shared programmable platform while preserving the existing two-tier monetary system \cite{bis_press_agora_2024, bis_bulletin87_2024}.
-%Although some of the mentioned systems involve commercial-bank participation, the governance, institutional trust and the design decisions are driven finally by central-banks or public-sector-led frameworks.
 Moreover, a growing number of industry-led projects aim to establish shared DLT infrastructures. 
 Examples include \emph{Fnality} \cite{fnality}, which explores tokenized settlement mechanisms backed by funds held at central banks, \emph{Partior} \cite{partior}, which focuses on cross-border interbank settlement and tokenized commercial-bank liabilities, and the \emph{Canton Network} \cite{canton_network_whitepaper_2024}, intended as a ``network of networks'', aiming to provide synchronization infrastructure for tokenized financial-market applications. 
-As a related boundary case, the Commercial Bank Money Token proof of concept also considers the European Public Network, a public-permissioned EVM-based infrastructure using proof-of-authority consensus for financial-sector tokenisation use cases \cite{DKBDI2024CBMT}.
-Although these projects differ substantially in architecture and governance, they illustrate a common pattern: transaction validation, ordering, or synchronization is typically restricted to predefined authorized entities rather than opened to anonymous public participation.
+Also, the Commercial Bank Money Token proof of concept considers the European Public Network, a public-permissioned EVM-based infrastructure using PoA consensus for financial-sector tokenisation use cases \cite{DKBDI2024CBMT}.
 \todo{Look into deloitte workshop sources for more real world projects} 
 
-A common feature of many institutional DLT systems is that transaction validation, ordering, or synchronization is restricted to predefined and legally identifiable entities rather than being open to anonymous participation. This design choice is natural in regulated financial markets, but it creates a structural governance problem when authority over the ledger state is exercised by entities that are simultaneously competitors in the markets served by the infrastructure.
+
+Although these projects differ substantially in architecture and governance, they illustrate a common pattern: transaction validation, ordering, or synchronization is typically restricted to predefined authorized entities rather than opened to anonymous public participation.
+This authority-based design choice is natural in regulated financial markets, but it creates a structural governance problem when authority over the ledger state is exercised by entities that are simultaneously competitors in the markets served by the infrastructure.
 
 This discussion paper argues that Proof-of-Authority (PoA) and closely related authority-based consensus models are structurally problematic when used as the consensus layer of shared financial-market DLT infrastructures operated by commercial banks.
 The problem is not primarily technical, i.e., does not necessarily regard common objectives for the design of consensus algorithms.
@@ -156,7 +158,6 @@ In this respect, the analysis also connects to work on transaction-ordering powe
 
 
 
-
 \paragraph{Outline.}
 The remainder of the paper is organized as follows.
 \Cref{sec:authority-based-consensus} defines PoA and related authority-based consensus models in the context of financial-market DLTs.
@@ -167,22 +168,21 @@ After a discussion of neutral governance and Real time Gross Settlement (RTGS) s
 \section{Authority-based consensus in financial-market DLTs}
 \label{sec:authority-based-consensus}
 
-Conceptually, a DLT consists of a set of distributed nodes, which are computers or systems operated by participating entities, maintaining a shared ledger state through a consensus mechanism \cite{cpmiDlt2017,nakamoto2008}. 
+Conceptually, a DLT consists of a set of distributed nodes, which are computers or systems operated by participating entities, maintaining a shared ledger state through a consensus mechanism or algorithm \cite{schneider1990implementing,nakamoto2008,cpmiDlt2017}. 
 The consensus algorithm describes how the nodes agree on the validity and ordering of transactions and ensures that participants converge on a common representation of the system state despite distributed operation.
 Consequently, the consensus mechanism effectively determines which transactions become part of the authoritative ledger state and under which conditions state transitions are finalized.
 Examples of distributed consensus mechanisms include classical distributed systems algorithms such as Paxos \cite{lamport1998paxos} or Raft \cite{ongaro2014raft} as well as blockchain-specific approaches such as Proof-of-Work (PoW)\cite{nakamoto2008}, Proof-of-Stake (PoS) \cite{buterincasper2018PoS}, or Proof-of-Authority (PoA) (see, e.g., \cite{MANOLACHE2022580,szilagyi2017clique,woodPoA}). 
 
 
 Public DLT systems often rely on open participation and decentralized consensus at the cost of scalability, settlement latency and computational efficiency.
-Institutional DLT systems, in contrast, adopt permissioned consensus mechanisms with predefined validators \cite{auerMonnetShin2021}.
-In the aforementioned financial market applications of DLTs, participants are supposed to be legally identified entities, primarily commercial banks and central banks, regulated financial market infrastructures, and infrastructure providers.
-Naturally, the access to these systems is permissioned, in stark contrast to public networks like Bitcoin \cite{nakamoto2008} or Ethereum \cite{buterin2014ethereum}, which originally popularized DLT.
+In financial market applications of DLTs, participants are supposed to be legally identified entities, primarily commercial banks and central banks, regulated financial market infrastructures, and infrastructure providers.
+Naturally, the permissioned access to institutional DLT systems leads to adoption of permissioned consensus mechanisms with predefined validators \cite{auerMonnetShin2021}, in stark contrast to public networks like Bitcoin \cite{nakamoto2008} or Ethereum \cite{buterin2014ethereum}, which originally popularized DLT.
 
-Consequently, the consensus problem differs fundamentally from that of the public blockchains: rather than coordinating anonymous and potentially adversarial actors\footnote{In typical blockchain and state machine replication literature, the security model of DLTs is often called Byzantine fault tolerance, see also the Byzantine Generals Problem described in \cite{lamportByzantine1982}.}, the system must primarily ensure consistent state replication and transaction ordering among a fixed set of identifiable institutions that may cooperate operationally while remaining economically and strategically distinct.
+
+%Consequently, the consensus problem differs fundamentally from that of the public blockchains: rather than coordinating anonymous and potentially adversarial actors\footnote{In typical blockchain and state machine replication literature, the security model of DLTs is often called Byzantine fault tolerance, see also the Byzantine Generals Problem described in \cite{lamportByzantine1982}.}, the system must primarily ensure consistent state replication and transaction ordering among a fixed set of identifiable institutions that may cooperate operationally while remaining economically and strategically distinct.
+Consequently, the consensus problem differs fundamentally from that of the public blockchains: rather than coordinating anonymous and potentially adversarial actors, the system must primarily ensure consistent state replication and transaction ordering among a fixed set of identifiable institutions that may cooperate operationally while remaining economically and strategically distinct.
 This distinction is central for financial-market DLTs.
 The relevant trust problem is not eliminated by legal identification of validators, but transformed into a question of how ordering and validation authority is allocated among institutions with potentially divergent incentives.
-
-
 
 
 
@@ -191,7 +191,7 @@ The relevant trust problem is not eliminated by legal identification of validato
 
 In this paper, PoA is used in a broad sense to denote permissioned consensus mechanisms in which transaction ordering, validation, or finality depends on a legally identified and administratively selected set of authorities.
 Some variants of PoA also allow validators to vote about the introduction of new validators according to predetermined rules.
-This includes explicit Ethereum-derived PoA protocols such as Clique, which is an Ethereum proof-of-authority protocol specified in EIP-225 \cite{szilagyi2017clique}, and Byzantine-fault-tolerant authority-based protocols such as IBFT and IBFT~2.0 \cite{moniz2020ibft,saltini2019ibft2}, but also functionally equivalent authority-based arrangements in commercial-bank DLT systems, such as notary services (see, e.g.,\cite{cordaNotary}), ordering services (as in \cite{fabricOrdering}), validator committees , or synchronization or sequencing committees \cite{canton_network_whitepaper_2024}.
+This includes explicit Ethereum-derived PoA protocols such as Clique, which is an Ethereum PoA protocol specified in EIP-225 \cite{szilagyi2017clique}, and Byzantine-fault-tolerant authority-based protocols such as IBFT and IBFT~2.0 \cite{moniz2020ibft,saltini2019ibft2}, but also functionally equivalent authority-based arrangements in commercial-bank DLT systems, such as notary services (see, e.g., \cite{cordaNotary}), ordering services (as in \cite{fabricOrdering}), validator committees, or synchronization or sequencing committees \cite{canton_network_whitepaper_2024}.
 Enterprise Ethereum clients such as Hyperledger Besu and GoQuorum implement PoA-style protocols including Clique, IBFT~2.0, and QBFT for private permissioned networks \cite{besuPoa,goquorumConsensus}.
 
 The purpose of this terminology is not to claim that all such systems implement the same protocol.
@@ -203,26 +203,15 @@ The appeal of the PoA approach is clear.
 By eliminating open participation and competition from the consensus, PoA enables high throughput, low latency, and operational simplicity due to the reduction of the coordination problem, some of the most prominent drawbacks of early public DLT networks, while still providing advantages such as programmability and atomic settlement.
 These technical advantages do not resolve the institutional allocation problem.
 In financial-market infrastructures, the relevant question is not only whether a restricted validator set can process transactions efficiently, but whether the institutions controlling ordering and finality have incentives compatible with neutral market infrastructure.
-Moreover, in financial market DLT validators shall be known, legally responsible entities such that the system can additionally rely on legal accountability and institutional governance rather than purely cryptoeconomic incentives.
-For this reason, permissioned validation is common in enterprise DLT architectures and financial-market DLT experiments.
 
-
-
-In financial market infrastructures, the role of validators is economically significant, since they ultimately determine the ordering and finalization of payments, securities transfers, and other high-value financial transactions. 
-Transaction ordering is particularly relevant because it determines the underlying system state under which transactions are executed.
+Ultimately, the role of validators is economically significant, since they determine the ordering and finalization of payments, securities transfers, and other high-value financial transactions. 
+Transaction ordering and inclusion is particularly relevant because it determines the underlying system state under which transactions are executed.
 Thus, it directly affects economic outcome of transactions and may also result in certain operations to be delayed, reordered, or even rejected depending on the effects of the evolving ledger state.
 The literature on front-running and maximal extractable value illustrates that control over ordering can itself become economically valuable \cite{daian2020flashboys,eskandari2019transparent}.
 
 
-%However, the governance structure underlying many of the financial-market DLT systems with PoA or similar approaches remains fundamentally ambiguous. 
-%While many projects adopt permissioned validation models, they do not resolve a central design question: how validation authority should be allocated among participating institutions in the long term.
-%This question is not merely technical but reflects the economic structure of the underlying market and will increasingly be challenged as the value of assets processed on such platforms grows.
-%Typically, commercial bank initiatives organize their consensus either as central operation through a single player or as operation through consortia of competing institutions. 
-%For example, early-stage prototypes such as Project Cedar rely on simplified architectures with a single trusted operator, while´ broader multi-bank infrastructures distribute operational responsibility across multiple institutions \cite{nyicCedarAppendix}.
-%Others, such as the Canton Network \cite{canton_network_whitepaper_2024}, use a validator operated by a consortium\footnote{This validator of the ``synchronization layer'' is also called super-validator in \cite{canton_global_synchronizer_docs}.}. 
-%Likewise, large-scale projects such as mBridge explicitly aim to establish shared infrastructures across a set of participating banks \cite{bisMbridge2022}. \todo{Check these statements, also for CB participation. Need examples}
 
-However, the governance structure underlying authority-based consensus in financial-market DLT systems remains a central institutional design problem.
+Thus, the governance structure underlying authority-based consensus in financial-market DLT systems remains a central institutional design problem.
 While permissioned validation identifies who may participate in consensus, it does not by itself determine how validation authority should be allocated among participating institutions in the long term.
 This question is not merely technical.
 It reflects the economic structure of the underlying market and becomes more contested as the value of assets processed on the platform grows.
@@ -280,11 +269,9 @@ A PoA ledger must answer a simple question: who is allowed to decide the canonic
 		& Requires public mandate, legal basis, and institutional neutrality; not replicable by ordinary commercial-bank governance \\
 		\hline\hline 
 	\end{tabularx}
-	\caption{Canonical authority-based consensus configurations in financial-market DLT infrastructures. The relevant distinction is not only the number of validators, but whether validation authority is exercised by a neutral public operator or by commercially competing market participants. The classification is specific to PoA and related authority-based consensus models and is not intended as a general taxonomy of all consensus mechanisms. The table does not imply that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure..}
+	\caption{Canonical authority-based consensus configurations in financial-market DLT infrastructures. The relevant distinction is not only the number of validators, but whether validation authority is exercised by a neutral public operator or by commercially competing market participants. The classification is specific to PoA and related authority-based consensus models and is not intended as a general taxonomy of all consensus mechanisms. The table does not imply that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure.}
 	\label{tab:poa-configurations}
 \end{table*}
-The inclusion of the neutral public or central-bank operator case should not be read as a claim that central-bank validation is necessarily appropriate for every conceivable shared financial-market DLT infrastructure.
-Rather, it serves as a benchmark illustrating that the institutional assessment of PoA depends on whether validation authority is exercised by a neutral public authority or by commercially competing market participants.
 
 
 
@@ -324,9 +311,8 @@ Legal enforcement is therefore an important safeguard, but cannot substitute the
 
 
 
-Consequently, competing banks\footnote{At least, the competitors large enough to operate such a potentially huge and important system on their own.} would therefore have strong incentives either not to join the platform or to create their own equivalent platforms. 
-For sufficiently large competitors, the dependence on the validator is unlikely to be stable.
-A major bank has weak incentives to rely on a ledger whose transaction ordering, inclusion policy, operational availability, and technical roadmap are controlled by a direct rival.
+Consequently, competing banks\footnote{At least, the competitors large enough to operate such a potentially huge and important system on their own.} would have strong incentives either not to join the platform or to create their own equivalent platforms. 
+For sufficiently large competitors, the dependence on the validator is unlikely to be stable due to these incentives.
 The likely result is market fragmentation: instead of converging on a limited number of shared infrastructures, the market splits into many bank-operated ledgers with limited interoperability and duplicated liquidity. 
 In the extreme, each major competitor may operate its own DLT, turning the DLT infrastructure landscape into a set of rival settlement islands.
 Interoperability would then have to be restored through bridges, APIs, contractual arrangements, or other reconciliation mechanisms.
@@ -393,12 +379,13 @@ For high-value financial-market infrastructures, this creates governance and leg
 
 The previous section analyzed the structural failure modes of PoA consensus when applied to shared market infrastructures operated by commercial banks or other competitors in the market.
 This section argues that these failures are not inherent to authority-based consensus as such, but arise from the institutional position of the authority exercising control over transaction ordering, inclusion, and finality.
-Thus, we examine how neutral governance makes authority-based consensus viable.
-First, we briefly demonstrate that the above failure modes are mitigated when the validators in PoA consensus are no competing market participants.
-Second, we discuss existing RTGS systems as institutional analogues for successful authority-based settlement infrastructures under neutral governance. 
-Finally, we argue that the absence of relevant privately operated RTGS systems supports the view that shared financial market infrastructures require governance by either public authorities, such as central banks, or independent technical service providers whose role is institutionally separated from competitive banking activity.
-Consequently, we argue that the absence of relevant privately-operated RTGS systems supports the view that shared financial market infrastructures require governance by either public authorities, such as central banks, or independent technical service providers whose role is institutionally separated from competitive banking activity.
+Thus, we examine how neutral governance makes authority-based consensus viable by demonstrating the mitigation of above failure modes through neutral authority consensus and discussing existing RTGS systems as institutional analogues for successful authority-based infrastructures under neutral governance.
 
+
+%Thus, we examine how neutral governance makes authority-based consensus viable.
+%First, we briefly demonstrate that the above failure modes are mitigated when the validators in PoA consensus are no competing market participants.
+%Second, we discuss existing RTGS systems as institutional analogues for successful authority-based settlement infrastructures under neutral governance. 
+%Finally, we argue that the absence of relevant privately operated RTGS systems supports the view that shared financial market infrastructures require governance by either public authorities, such as central banks, or independent technical service providers whose role is institutionally separated from competitive banking activity.
 
 \subsection{Why neutrality changes the institutional problem of Proof-of-Authority}
 The failure modes identified above do not arise from authority-based consensus as such, but from the institutional position of the authority exercising control over ordering, inclusion and finality. 
@@ -454,7 +441,6 @@ The institutional suitability of RTGS systems can be summarized by the following
 \subsection{The limited role of private operation in RTGS systems}
 
 
-
 The role of private operation in RTGS systems is limited and institutionally qualified. Existing arrangements do not generally assign autonomous settlement authority to a commercial bank or a subset of competing commercial banks. Where private entities are involved, their role is typically embedded in a framework of central-bank settlement, public oversight, or delegated technical operation. The Swiss SIC system illustrates this distinction: it is operated by SIX Interbank Clearing Ltd on behalf of the Swiss National Bank (SNB), while the SNB remains the relevant public authority behind the system \cite{snb_sic_2024, snb_sic_web}. 
 Similarly, the historical CHAPS arrangement in the United Kingdom involved private-sector governance of the high-value payment system, but this model was replaced in 2017 by direct operation of CHAPS by the Bank of England in order to strengthen end-to-end risk management and financial stability \cite{boe_chaps_direct_delivery_2017,boe_rtgs_chaps_intro_2025}.
 
@@ -464,14 +450,12 @@ Private technical operation does not create the same institutional problem as pr
 By contrast, a PoA system operated or governed by commercial banks assigns the authoritative settlement function to actors with direct competitive interests in the market served by the infrastructure. 
 
 The RTGS experience therefore supports the central claim of this section: authority-based consensus is not unsuitable for financial market infrastructures per se; it is unsuitable when the authority is itself a competing market participant or coalition of competing market participants.
-Consequently, the RTGS systems in established financial markets do not support autonomous settlement authority by competing commercial banks, but instead points to central-bank operation, such as in T2 \cite{ecb_t2_2026} or Fedwire Funds \cite{fedwire_funds_2024}, operated by the Eurosystem and Federal Reserve System, respectively, or institutionally qualified private operation under central-bank settlement, public oversight, or delegated technical mandates, as illustrated by SIC, which is operated by SIX on behalf of and under the supervision of the SNB \cite{snb_sic_2024}, and Lynx, which is operated by Payments Canada while relying on settlement accounts at the Bank of Canada \cite{canada_lynx_bylaw_2021}.
-This is also reflected in major privately operated high-value payment systems such as CHIPS and EURO1, which do not constitute autonomous private RTGS systems but instead rely on liquidity-saving netting or hybrid settlement mechanisms and remain anchored in central-bank money or central-bank-operated settlement infrastructures \cite{chips_tch,eba_euro1_key_features}.
+Consequently, existing RTGS systems in established financial markets do not support autonomous settlement authority by competing commercial banks, but instead point to central-bank operation, such as in T2 \cite{ecb_t2_2026} or Fedwire Funds \cite{fedwire_funds_2024}, operated by the Eurosystem and Federal Reserve System, respectively, or institutionally qualified private operation under central-bank settlement, public oversight, or delegated technical mandates, as illustrated by SIC, which is operated by SIX on behalf of and under the supervision of the SNB \cite{snb_sic_2024}, and Lynx, which is operated by Payments Canada while relying on settlement accounts at the Bank of Canada \cite{canada_lynx_bylaw_2021}.
+Major privately operated high-value payment systems such as CHIPS and EURO1 do not constitute autonomous private RTGS systems but instead rely on liquidity-saving netting or hybrid settlement mechanisms and remain anchored in central-bank money or central-bank-operated settlement infrastructures \cite{chips_tch,eba_euro1_key_features}.
 
 \section{Conclusions}
+
 \label{sec:conclusions}
-
-The contribution of this paper is to shift the assessment of permissioned DLT consensus from technical performance alone to market structure, governance, and legal finality. In commercial-bank-operated financial-market infrastructures, the central design problem is not merely how consensus is reached, but who is institutionally authorized to determine the canonical ordering and final settlement state.
-
 The contribution of this paper is to shift the assessment of permissioned DLT consensus from technical performance alone to market structure, governance, and legal finality. 
 In commercial-bank-operated financial-market infrastructures, the central design problem is not merely how consensus is reached, but who is institutionally authorized to determine the canonical ordering and final settlement state. 
 Proof-of-Authority (PoA) consensus is therefore not only a technical design choice. 
@@ -508,7 +492,7 @@ DLT-based financial-market infrastructures therefore require a careful separatio
 One interesting implication of this analysis, that needs to be further explored, is that future DLT-based financial-market infrastructures may require hybrid architectures that separate public settlement authority from private innovation at higher layers.
 The author suggests a design where a layer-one (L1) infrastructure operated or governed by a public authority could provide the neutral settlement, synchronization, and finality layer, while privately operated layer-two (L2) networks could offer application-specific functionality, market services, or operational experimentation.
 This would allow interbank settlement of high-value obligations to remain anchored in a neutral institutional framework, while still enabling market participants to develop DLT-based services on top of that foundation on their respective L2s.
-In a setting where central banks provide such an L1, the issuance and settlement of tokenised wholesale central bank money can also be explored.
+In a setting where central banks provide such an L1, the issuance and settlement of tokenized wholesale central bank money can also be explored.
 
 \section{Acknowledgements}
 The author acknowledges useful discussions with Jan Boensel on the implications of consensus mechanisms for financial market infrastructure.
